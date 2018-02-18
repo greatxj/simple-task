@@ -16,8 +16,8 @@
 
         {!! Form::open(['class' => 'form-inline', 'route' => 'stone']) !!}
         <div class="form-group" style="margin: 10px">
-            <label class="sr-only" for="exampleInputEmail3">Title</label>
-            <input type="text" class="form-control" id="taskName" name="taskName" placeholder="Title">
+            <label class="sr-only" for="taskTitle">Title</label>
+            <input type="text" class="form-control" id="taskTitle" name="taskTitle" placeholder="Title">
         </div>
         <div class="form-group" style="margin: 10px">
             <label class="sr-only" for="taskContent">Content</label>
