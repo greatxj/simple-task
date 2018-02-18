@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Tasks\TasksController@index');
+Route::post('/save', 'Tasks\TasksController@stone')->name('stone');
