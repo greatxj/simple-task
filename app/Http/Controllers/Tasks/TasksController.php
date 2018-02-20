@@ -10,8 +10,10 @@ class TasksController extends Controller
 {
     public function index()
     {
+        // 获取所有的 Task 记录数值
         $task_count = Redis::get('task:count');
 
+        // 初始化
         $data = [];
 
         if ($task_count > 0) {
@@ -21,9 +23,11 @@ class TasksController extends Controller
                     'content' => Redis::get('task:' . $i . ':content'),
                 ];
 
+                // 组合
                 array_push($data, $task);
             }
         } else {
+            // 没有 Task 时的显示
             $data = [
                 [
                     'title'   => 'Hello world',
