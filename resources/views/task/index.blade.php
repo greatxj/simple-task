@@ -21,20 +21,23 @@
         </div>
         <div class="form-group" style="margin: 10px">
             <label class="sr-only" for="taskContent">Content</label>
-            <input type="text" class="form-control" id="taskContent" name="taskContent" placeholder="Content" style="width: 600px">
+            <input type="text" class="form-control" id="taskContent" name="taskContent" placeholder="Content"
+                   style="width: 600px">
         </div>
         <button type="submit" class="btn btn-primary" style="margin: 10px">Save</button>
         {!! Form::close() !!}
 
         <div class="my-3 p-3 bg-white rounded box-shadow">
-            <h6 class="border-bottom border-gray pb-2 mb-0">Tasks</h6>
+            <h6 class="border-bottom border-gray pb-2 mb-0">My Tasks</h6>
 
-            <div class="media text-muted pt-3">
-                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <strong class="d-block text-gray-dark">@username</strong>
-                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                </p>
-            </div>
+            @foreach ($data as $row)
+                <div class="media text-muted pt-3">
+                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <strong class="d-block text-gray-dark">{{ $row['title'] }}</strong>
+                        {{ $row['content'] }}
+                    </p>
+                </div>
+            @endforeach
         </div>
     </main>
 @endsection

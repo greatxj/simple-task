@@ -11,5 +11,5 @@
 |
 */
 
-Route::get('/', 'Tasks\TasksController@index');
+Route::get('/', 'Tasks\TasksController@index')->name('home');
 Route::post('/save', 'Tasks\TasksController@stone')->name('stone');

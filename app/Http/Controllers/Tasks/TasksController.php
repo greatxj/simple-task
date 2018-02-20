@@ -10,7 +10,29 @@ class TasksController extends Controller
 {
     public function index()
     {
-        return view('task.index');
+        $task_count = Redis::get('task:count');
+
+        $data = [];
+
+        if ($task_count > 0) {
+            for ($i = 1; $i <= $task_count; $i++) {
+                $task = [
+                    'title'   => Redis::get('task:' . $i . ':title'),
+                    'content' => Redis::get('task:' . $i . ':content'),
+                ];
+
+                array_push($data, $task);
+            }
+        } else {
+            $data = [
+                [
+                    'title'   => 'Hello world',
+                    'content' => 'Hello world, this is a Laravel + Redis project',
+                ]
+            ];
+        }
+
+        return view('task.index', compact('data'));
     }
 
     public function stone(Request $request)
@@ -22,7 +44,11 @@ class TasksController extends Controller
 
         $taskID = $this->getTaskCountNum();
 
-        $this->saveTask($taskID, $request->taskTitle, $request->taskContent);
+        $result = $this->saveTask($taskID, $request->taskTitle, $request->taskContent);
+
+        if ($result) {
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -37,8 +63,8 @@ class TasksController extends Controller
 
     private function saveTask($id, $title, $content)
     {
-        Reids::set('task:' . $id . ':title', $title);
-        Reids::set('task:' . $id . ':content', $content);
+        Redis::set('task:' . $id . ':title', $title);
+        Redis::set('task:' . $id . ':content', $content);
 
         return TRUE;
     }
